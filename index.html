@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Planejamento - Game Jam 42 Escola</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        .timeline {
+            background: rgba(255,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ff4444;
+        }
+        .section {
+            background: rgba(255,255,255,0.1);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .section h2 {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .question-group {
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        .question {
+            font-weight: bold;
+            color: #87CEEB;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .option {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .option:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #FFD700;
+            transform: translateY(-2px);
+        }
+        .option.selected {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+        }
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+            backdrop-filter: blur(10px);
+        }
+        .text-input::placeholder {
+            color: #ccc;
+        }
+        .team-structure {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .role {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(33, 150, 243, 0.2));
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .role h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        .export-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .export-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #FFD700);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .character {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Game Jam - Projeto 42</h1>
+            <p><strong>Tema:</strong> O Mochileiro das Galáxias meets Programação</p>
+            <div class="timeline">
+                <strong>⏰ CRONOGRAMA CRÍTICO:</strong><br>
+                Sábado 18h - Happy Hour<br>
+                Domingo 12h - ENTREGA FINAL
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 1: CONCEITO DO JOGO -->
+        <div class="section">
+            <h2>🎮 1. DEFINIÇÃO DO CONCEITO</h2>
+            
+            <div class="question-group">
+                <div class="question">Qual será a mecânica principal do jogo?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Tower Defense com Código</div>
+                    <div class="option" onclick="selectOption(this)">Typing Defense (como Typing of the Dead)</div>
+                    <div class="option" onclick="selectOption(this)">Puzzle + Action em Tempo Real</div>
+                    <div class="option" onclick="selectOption(this)">RPG de Comandos</div>
+                </div>
+                <input type="text" class="text-input" placeholder="Descreva a mecânica escolhida em detalhes...">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como o jogador interage?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Digita comandos shell em tempo real</div>
+                    <div class="option" onclick="selectOption(this)">Escolhe comandos de um menu</div>
+                    <div class="option" onclick="selectOption(this)">Arrasta e solta blocos de código</div>
+                    <div class="option" onclick="selectOption(this)">Híbrido (digita + clica)</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Qual será a progressão do jogo?</div>
+                <input type="text" class="text-input" placeholder="Como o jogador evolui? Exemplo: Começa com ls, cd, depois scripts...">
+            </div>
+        </div>
+
+        <!-- SEÇÃO 2: PERSONAGENS E MUNDO -->
+        <div class="section">
+            <h2>👥 2. PERSONAGENS E LORE</h2>
+            
+            <div class="question-group">
+                <div class="question">Protagonista (o jogador será?):</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Estudante perdido (Arthur Dent style)</div>
+                    <div class="option" onclick="selectOption(this)">Hacker rebelde contra IA</div>
+                    <div class="option" onclick="selectOption(this)">Debugger profissional</div>
+                    <div class="option" onclick="selectOption(this)">IA boa lutando contra Molinette</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Principais inimigos (bichinhos de código):</div>
+                <div class="character-grid">
+                    <div class="character">
+                        <strong>Bug Rastejante</strong><br>
+                        <small>Ataque: Syntax errors simples</small>
+                    </div>
+                    <div class="character">
+                        <strong>Virus Voador</strong><br>
+                        <small>Ataque: Códigos maliciosos</small>
+                    </div>
+                    <div class="character">
+                        <strong>Exception Gigante</strong><br>
+                        <small>Boss: Erros complexos</small>
+                    </div>
+                    <div class="character">
+                        <strong>Loop Infinito</strong><br>
+                        <small>Trava o tempo por segundos</small>
+                    </div>
+                </div>
+                <input type="text" class="text-input" placeholder="Adicione outros inimigos específicos...">
+            </div>
+
+            <div class="question-group">
+                <div class="question">A Molinette rebelde será:</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Boss final épico</div>
+                    <div class="option" onclick="selectOption(this)">Vilã presente em todo jogo</div>
+                    <div class="option" onclick="selectOption(this)">Narrador malévolo</div>
+                    <div class="option" onclick="selectOption(this)">Sistema que evolui contra o jogador</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3: GAMEPLAY -->
+        <div class="section">
+            <h2>⚔️ 3. MECÂNICAS DE GAMEPLAY</h2>
+            
+            <div class="question-group">
+                <div class="question">Comandos iniciais que o jogador aprende:</div>
+                <input type="text" class="text-input" placeholder="Ex: ls, cd, rm, cat, grep, ps, kill..." value="ls, cd, rm, cat, grep">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como funcionará a dificuldade progressiva?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Velocidade aumenta gradualmente</div>
+                    <div class="option" onclick="selectOption(this)">Comandos mais complexos</div>
+                    <div class="option" onclick="selectOption(this)">Múltiplos inimigos simultâneos</div>
+                    <div class="option" onclick="selectOption(this)">Combinação de todos acima</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Sistema de pontuação/recompensas:</div>
+                <input type="text" class="text-input" placeholder="Como o jogador é recompensado? XP? Novos comandos? Achievements?">
+            </div>
+        </div>
+
+        <!-- SEÇÃO 4: ARTE E ESTILO -->
+        <div class="section">
+            <h2>🎨 4. ARTE E ESTILO VISUAL</h2>
+            
+            <div class="question-group">
+                <div class="question">Estilo artístico:</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Pixel Art retro</div>
+                    <div class="option" onclick="selectOption(this)">Terminal/Matrix aesthetic</div>
+                    <div class="option" onclick="selectOption(this)">Cartoon space-themed</div>
+                    <div class="option" onclick="selectOption(this)">Minimalista neon</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Paleta de cores principal:</div>
+                <input type="text" class="text-input" placeholder="Ex: Verde terminal + azul espacial + dourado...">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como serão os bichinhos inimigos?</div>
+                <input type="text" class="text-input" placeholder="Descrição visual: robozinhos? Sprites abstratos? Criaturas fofas?">
+            </div>
+        </div>
+
+        <!-- SEÇÃO 5: DIVISÃO DE TAREFAS -->
+        <div class="section">
+            <h2>👥 5. ESTRUTURA DA EQUIPE (5 PESSOAS)</h2>
+            
+            <div class="team-structure">
+                <div class="role">
+                    <h3>🎯 Game Designer / Líder</h3>
+                    <p><strong>Responsabilidades:</strong></p>
+                    <ul>
+                        <li>Definir mecânicas finais</li>
+                        <li>Balanceamento do jogo</li>
+                        <li>Coordenar a equipe</li>
+                        <li>Documentação</li>
+                    </ul>
+                    <input type="text" class="text-input" placeholder="Nome da pessoa:">
+                </div>
+
+                <div class="role">
+                    <h3>💻 Programador Principal</h3>
+                    <p><strong>Responsabilidades:</strong></p>
+                    <ul>
+                        <li>Sistema de input de comandos</li>
+                        <li>Lógica de gameplay</li>
+                        <li>Integração no Godot</li>
+                        <li>Sistema de progressão</li>
+                    </ul>
+                    <input type="text" class="text-input" placeholder="Nome da pessoa:">
+                </div>
+
+                <div class="role">
+                    <h3>🎨 Artista / UI Designer</h3>
+                    <p><strong>Responsabilidades:</strong></p>
+                    <ul>
+                        <li>Sprites dos inimigos</li>
+                        <li>Interface do usuário</li>
+                        <li>Animações básicas</li>
+                        <li>Tela de terminal</li>
+                    </ul>
+                    <input type="text" class="text-input" placeholder="Nome da pessoa:">
+                </div>
+
+                <div class="role">
+                    <h3>🔧 Programador de Sistema</h3>
+                    <p><strong>Responsabilidades:</strong></p>
+                    <ul>
+                        <li>Sistema de spawn de inimigos</li>
+                        <li>Física e colisões</li>
+                        <li>Sistema de saúde/pontuação</li>
+                        <li>Menus e transições</li>
+                    </ul>
+                    <input type="text" class="text-input" placeholder="Nome da pessoa:">
+                </div>
+
+                <div class="role">
+                    <h3>🎵 Sound Designer / QA</h3>
+                    <p><strong>Responsabilidades:</strong></p>
+                    <ul>
+                        <li>Efeitos sonoros</li>
+                        <li>Música de fundo</li>
+                        <li>Testes de gameplay</li>
+                        <li>Polish final</li>
+                    </ul>
+                    <input type="text" class="text-input" placeholder="Nome da pessoa:">
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 6: CRONOGRAMA DETALHADO -->
+        <div class="section">
+            <h2>⏰ 6. CRONOGRAMA DETALHADO</h2>
+            
+            <div class="question-group">
+                <div class="question">SÁBADO - Sessões de Trabalho:</div>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start;">
+                    <div>
+                        <strong>Agora - 2h:</strong><br>
+                        <small>Definir conceito final</small>
+                    </div>
+                    <input type="text" class="text-input" placeholder="Atividades específicas desta sessão...">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start; margin-top: 15px;">
+                    <div>
+                        <strong>2h - 6h:</strong><br>
+                        <small>Prototipagem core</small>
+                    </div>
+                    <input type="text" class="text-input" placeholder="O que deve estar funcionando até às 18h?">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start; margin-top: 15px;">
+                    <div>
+                        <strong>18h - 22h:</strong><br>
+                        <small>Happy hour + trabalho</small>
+                    </div>
+                    <input type="text" class="text-input" placeholder="Atividades para o happy hour (mais leves)...">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start; margin-top: 15px;">
+                    <div>
+                        <strong>22h - 2h:</strong><br>
+                        <small>Sprint noturno</small>
+                    </div>
+                    <input type="text" class="text-input" placeholder="Funcionalidades principais a implementar...">
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">DOMINGO - Finalização:</div>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start;">
+                    <div>
+                        <strong>8h - 10h:</strong><br>
+                        <small>Polish e ajustes</small>
+                    </div>
+                    <input type="text" class="text-input" placeholder="Últimos ajustes e correções...">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start; margin-top: 15px;">
+                    <div>
+                        <strong>10h - 12h:</strong><br>
+                        <small>Build final e apresentação</small>
+                    </div>
+                    <input type="text" class="text-input" placeholder="Preparação da apresentação e build...">
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 7: ESCOPO MÍNIMO -->
+        <div class="section">
+            <h2>✅ 7. MVP - PRODUTO MÍNIMO VIÁVEL</h2>
+            
+            <div class="question-group">
+                <div class="question">O que DEVE funcionar na entrega:</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Jogador pode digitar comandos
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Inimigos aparecem na tela
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Comandos corretos destroem inimigos
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Sistema de pontuação básico
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Game over quando inimigos chegam
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        3-5 comandos diferentes funcionando
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Arte básica (pode ser placeholder)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Som básico
+                    </label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Features "se der tempo":</div>
+                <input type="text" class="text-input" placeholder="Múltiplos níveis, power-ups, mais inimigos, animações elaboradas...">
+            </div>
+        </div>
+
+        <!-- SEÇÃO 8: DECISÕES TÉCNICAS -->
+        <div class="section">
+            <h2>⚙️ 8. DECISÕES TÉCNICAS</h2>
+            
+            <div class="question-group">
+                <div class="question">Como implementar o terminal no Godot?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">LineEdit com validação de comandos</div>
+                    <div class="option" onclick="selectOption(this)">TextEdit mais elaborado</div>
+                    <div class="option" onclick="selectOption(this)">Plugin de terminal (se existir)</div>
+                    <div class="option" onclick="selectOption(this)">Sistema próprio com RichTextLabel</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Estrutura de arquivos do projeto:</div>
+                <input type="text" class="text-input" placeholder="Como organizar scenes, scripts, assets...">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Resolução alvo e plataforma:</div>
+                <input type="text" class="text-input" placeholder="PC? Web? Mobile? Resolução?">
+            </div>
+        </div>
+
+        <button class="export-btn" onclick="exportReport()">📋 GERAR RELATÓRIO FINAL</button>
+        
+        <div id="exportArea" style="display: none; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; margin-top: 20px;">
+            <h3>Relatório Gerado - Copie o conteúdo abaixo:</h3>
+            <textarea id="reportText" style="width: 100%; height: 300px; margin-top: 10px; padding: 15px; border-radius: 8px; background: #222; color: #fff; border: 1px solid #555;"></textarea>
+            <button onclick="copyToClipboard()" style="margin-top: 10px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">📋 Copiar para Área de Transferência</button>
+        </div>
+    </div>
+
+    <script>
+        function selectOption(element) {
+            // Remove selection from siblings
+            const siblings = element.parentNode.children;
+            for (let sibling of siblings) {
+                sibling.classList.remove('selected');
+            }
+            // Add selection to clicked element
+            element.classList.add('selected');
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const percentage = (checked / checkboxes.length) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        function exportReport() {
+            let report = "# RELATÓRIO DE PLANEJAMENTO - GAME JAM 42\n\n";
+            report += "## CRONOGRAMA\n";
+            report += "- Início: Sábado após reunião\n";
+            report += "- Happy Hour: Sábado 18h\n";
+            report += "- Entrega: Domingo 12h\n\n";
+            
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                const title = section.querySelector('h2').textContent;
+                report += `## ${title}\n\n`;
+                
+                const questions = section.querySelectorAll('.question-group');
+                questions.forEach(group => {
+                    const question = group.querySelector('.question').textContent;
+                    report += `**${question}**\n`;
+                    
+                    // Check for selected options
+                    const selectedOptions = group.querySelectorAll('.option.selected');
+                    if (selectedOptions.length > 0) {
+                        selectedOptions.forEach(option => {
+                            report += `- ✅ ${option.textContent}\n`;
+                        });
+                    }
+                    
+                    // Check for text inputs
+                    const textInputs = group.querySelectorAll('.text-input');
+                    textInputs.forEach(input => {
+                        if (input.value.trim()) {
+                            report += `- 📝 ${input.value}\n`;
+                        }
+                    });
+                    
+                    report += "\n";
+                });
+            });
+            
+            // Add team assignments
+            report += "## EQUIPE DEFINIDA\n\n";
+            const roles = document.querySelectorAll('.role');
+            roles.forEach(role => {
+                const roleTitle = role.querySelector('h3').textContent;
+                const nameInput = role.querySelector('.text-input');
+                if (nameInput.value.trim()) {
+                    report += `**${roleTitle}**: ${nameInput.value}\n`;
+                }
+            });
+            
+            // Add progress
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            report += `\n## PROGRESSO MVP\n`;
+            report += `${checked}/${checkboxes.length} itens definidos (${Math.round((checked/checkboxes.length)*100)}%)\n`;
+            
+            document.getElementById('reportText').value = report;
+            document.getElementById('exportArea').style.display = 'block';
+        }
+        
+        function copyToClipboard() {
+            const textArea = document.getElementById('reportText');
+            textArea.select();
+            document.execCommand('copy');
+            alert('Relatório copiado para a área de transferência!');
+        }
+
+        // Auto-save functionality
+        setInterval(() => {
+            const data = {};
+            document.querySelectorAll('.text-input').forEach((input, index) => {
+                data[`input_${index}`] = input.value;
+            });
+            document.querySelectorAll('.option.selected').forEach((option, index) => {
+                data[`selected_${index}`] = option.textContent;
+            });
+            localStorage.setItem('gamejam_planning', JSON.stringify(data));
+        }, 10000);
+    </script>
+</body>
+</html>
