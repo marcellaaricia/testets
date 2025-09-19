@@ -161,6 +161,21 @@
             border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.1);
         }
+        .learning-tip {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #FFC107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+        .fun-factor {
+            background: rgba(233, 30, 99, 0.1);
+            border-left: 4px solid #E91E63;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -191,6 +206,9 @@
                     <div class="option" onclick="selectOption(this)">RPG de Comandos</div>
                 </div>
                 <input type="text" class="text-input" placeholder="Descreva a mecânica escolhida em detalhes...">
+                <div class="learning-tip">
+                    💡 <strong>Dica de Aprendizado:</strong> Escolha uma mecânica que permita errar sem punição severa. O aprendizado acontece através da experimentação!
+                </div>
             </div>
 
             <div class="question-group">
@@ -205,7 +223,17 @@
 
             <div class="question-group">
                 <div class="question">Qual será a progressão do jogo?</div>
-                <input type="text" class="text-input" placeholder="Como o jogador evolui? Exemplo: Começa com ls, cd, depois scripts...">
+                <input type="text" class="text-input" placeholder="Como o jogador evolui? Exemplo: Começa com ls, cd, depois scripts..." value="Tutorial interativo → Comandos básicos → Pipes e redirecionamento → Scripts simples → Comandos avançados">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como introduzir novos conceitos sem sobrecarregar?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Um novo comando por nível</div>
+                    <div class="option" onclick="selectOption(this)">Tutorial contextual durante gameplay</div>
+                    <div class="option" onclick="selectOption(this)">Prática guiada antes de usar em combate</div>
+                    <div class="option" onclick="selectOption(this)">Sistema de sugestões inteligentes</div>
+                </div>
             </div>
         </div>
 
@@ -257,13 +285,69 @@
             </div>
         </div>
 
-        <!-- SEÇÃO 3: GAMEPLAY -->
+        <!-- SEÇÃO 3: EQUILÍBRIO APRENDIZADO E DIVERSÃO -->
         <div class="section">
-            <h2>⚔️ 3. MECÂNICAS DE GAMEPLAY</h2>
+            <h2>🎓🎮 3. EQUILÍBRIO: APRENDIZADO E DIVERSÃO</h2>
+            
+            <div class="question-group">
+                <div class="question">Como garantir que o jogador se divirta ENQUANTO aprende?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Comandos geram efeitos visuais espetaculares</div>
+                    <div class="option" onclick="selectOption(this)">Humor e easter eggs em mensagens de erro</div>
+                    <div class="option" onclick="selectOption(this)">Mecânica de progressão com desbloqueios</div>
+                    <div class="option" onclick="selectOption(this)">Combos e pontuação por sequências corretas</div>
+                </div>
+                <input type="text" class="text-input" placeholder="Outras ideias para tornar o aprendizado divertido...">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como evitar que o jogador se sinta frustrado ao errar?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Dicas contextuais aparecem após erro</div>
+                    <div class="option" onclick="selectOption(this)">Autocomplete inteligente</div>
+                    <div class="option" onclick="selectOption(this)">Sistema de "oops" que reverte último comando</div>
+                    <div class="option" onclick="selectOption(this)">Mensagens de erro amigáveis e educativas</div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Sistema de recompensas educativas:</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Badge por aprender novo comando
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Enciclopédia de comandos desbloqueável
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Mini-tutoriais como cutscenes
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Personalizações cosméticas como prêmio
+                    </label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como manter o ritmo divertido sem comprometer o aprendizado?</div>
+                <input type="text" class="text-input" placeholder="Ex: Pausas para explicações, slow-motion quando acerta comando complexo...">
+            </div>
+        </div>
+
+        <!-- SEÇÃO 4: MECÂNICAS DE GAMEPLAY -->
+        <div class="section">
+            <h2>⚔️ 4. MECÂNICAS DE GAMEPLAY</h2>
             
             <div class="question-group">
                 <div class="question">Comandos iniciais que o jogador aprende:</div>
                 <input type="text" class="text-input" placeholder="Ex: ls, cd, rm, cat, grep, ps, kill..." value="ls, cd, rm, cat, grep">
+                <div class="learning-tip">
+                    📚 <strong>Sequência Pedagógica:</strong> Comece com comandos visuais (ls, cat) antes dos comandos de ação (rm, kill). O jogador precisa entender antes de modificar!
+                </div>
             </div>
 
             <div class="question-group">
@@ -274,17 +358,30 @@
                     <div class="option" onclick="selectOption(this)">Múltiplos inimigos simultâneos</div>
                     <div class="option" onclick="selectOption(this)">Combinação de todos acima</div>
                 </div>
+                <div class="fun-factor">
+                    🎮 <strong>Fator Diversão:</strong> A dificuldade deve crescer apenas quando o jogador demonstrar confiança com os comandos atuais!
+                </div>
             </div>
 
             <div class="question-group">
                 <div class="question">Sistema de pontuação/recompensas:</div>
-                <input type="text" class="text-input" placeholder="Como o jogador é recompensado? XP? Novos comandos? Achievements?">
+                <input type="text" class="text-input" placeholder="Como o jogador é recompensado? XP? Novos comandos? Achievements?" value="XP por comando correto + bonus por eficiência + desbloqueio de new abilities">
+            </div>
+
+            <div class="question-group">
+                <div class="question">Como tornar os erros parte do aprendizado?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">Explicação do erro em linguagem simples</div>
+                    <div class="option" onclick="selectOption(this)">Sugestão de comando correto</div>
+                    <div class="option" onclick="selectOption(this)">Mini-tutorial pop-up quando necessário</div>
+                    <div class="option" onclick="selectOption(this)">Sistema de "tentativa e erro" encorajado</div>
+                </div>
             </div>
         </div>
 
-        <!-- SEÇÃO 4: ARTE E ESTILO -->
+        <!-- SEÇÃO 5: ARTE E ESTILO -->
         <div class="section">
-            <h2>🎨 4. ARTE E ESTILO VISUAL</h2>
+            <h2>🎨 5. ARTE E ESTILO VISUAL</h2>
             
             <div class="question-group">
                 <div class="question">Estilo artístico:</div>
@@ -307,9 +404,9 @@
             </div>
         </div>
 
-        <!-- SEÇÃO 5: DIVISÃO DE TAREFAS -->
+        <!-- SEÇÃO 6: DIVISÃO DE TAREFAS -->
         <div class="section">
-            <h2>👥 5. ESTRUTURA DA EQUIPE (5 PESSOAS)</h2>
+            <h2>👥 6. ESTRUTURA DA EQUIPE (5 PESSOAS)</h2>
             
             <div class="team-structure">
                 <div class="role">
@@ -374,9 +471,9 @@
             </div>
         </div>
 
-        <!-- SEÇÃO 6: CRONOGRAMA DETALHADO -->
+        <!-- SEÇÃO 7: CRONOGRAMA DETALHADO -->
         <div class="section">
-            <h2>⏰ 6. CRONOGRAMA DETALHADO</h2>
+            <h2>⏰ 7. CRONOGRAMA DETALHADO</h2>
             
             <div class="question-group">
                 <div class="question">SÁBADO - Sessões de Trabalho:</div>
@@ -433,9 +530,9 @@
             </div>
         </div>
 
-        <!-- SEÇÃO 7: ESCOPO MÍNIMO -->
+        <!-- SEÇÃO 8: ESCOPO MÍNIMO -->
         <div class="section">
-            <h2>✅ 7. MVP - PRODUTO MÍNIMO VIÁVEL</h2>
+            <h2>✅ 8. MVP - PRODUTO MÍNIMO VIÁVEL</h2>
             
             <div class="question-group">
                 <div class="question">O que DEVE funcionar na entrega:</div>
@@ -472,6 +569,14 @@
                         <input type="checkbox" onchange="updateProgress()">
                         Som básico
                     </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Sistema de feedback positivo para acertos
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" onchange="updateProgress()">
+                        Dicas educativas quando jogador erra
+                    </label>
                 </div>
             </div>
 
@@ -481,9 +586,9 @@
             </div>
         </div>
 
-        <!-- SEÇÃO 8: DECISÕES TÉCNICAS -->
+        <!-- SEÇÃO 9: DECISÕES TÉCNICAS -->
         <div class="section">
-            <h2>⚙️ 8. DECISÕES TÉCNICAS</h2>
+            <h2>⚙️ 9. DECISÕES TÉCNICAS</h2>
             
             <div class="question-group">
                 <div class="question">Como implementar o terminal no Godot?</div>
